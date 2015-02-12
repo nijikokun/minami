@@ -295,11 +295,26 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
         var itemsNav = '';
 
         items.forEach(function(item) {
+            var methods = find({kind:'function', memberof: item.longname});
+            var members = find({kind:'member', memberof: item.longname});
+
             if ( !hasOwnProp.call(item, 'longname') ) {
-                itemsNav += '<li>' + linktoFn('', item.name) + '</li>';
-            }
-            else if ( !hasOwnProp.call(itemsSeen, item.longname) ) {
-                itemsNav += '<li>' + linktoFn(item.longname, item.name.replace(/^module:/, '')) + '</li>';
+                itemsNav += '<li>' + linktoFn('', item.name);
+                itemsNav += '</li>';
+            } else if ( !hasOwnProp.call(itemsSeen, item.longname) ) {
+                itemsNav += '<li>' + linktoFn(item.longname, item.name.replace(/^module:/, ''));
+                if (methods.length) {
+                    itemsNav += "<ul class='methods'>";
+
+                    methods.forEach(function (method) {
+                        itemsNav += "<li data-type='method'>";
+                        itemsNav += linkto(method.longname, method.name);
+                        itemsNav += "</li>";
+                    });
+
+                    itemsNav += "</ul>";
+                }
+                itemsNav += '</li>';
                 itemsSeen[item.longname] = true;
             }
         });
@@ -339,9 +354,9 @@ function buildNav(members) {
     var seen = {};
     var seenTutorials = {};
 
+    nav += buildMemberNav(members.classes, 'Classes', seen, linkto);
     nav += buildMemberNav(members.modules, 'Modules', {}, linkto);
     nav += buildMemberNav(members.externals, 'Externals', seen, linktoExternal);
-    nav += buildMemberNav(members.classes, 'Classes', seen, linkto);
     nav += buildMemberNav(members.events, 'Events', seen, linkto);
     nav += buildMemberNav(members.namespaces, 'Namespaces', seen, linkto);
     nav += buildMemberNav(members.mixins, 'Mixins', seen, linkto);

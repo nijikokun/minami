@@ -171,6 +171,12 @@ nav ul a:hover,
 nav ul a:active {
     background: hsl(0, 0%, 22%);
 }
+nav ul ul {
+    margin-bottom: 10px;
+}
+nav ul ul a {
+    padding-left: 20px;
+}
 nav h2 {
     font-size: 12px;
     margin: 0;
