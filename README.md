@@ -29,7 +29,7 @@ In your projects `package.json` file add a script and a dependency.
 
 "devDependencies": {
   "jsdoc": "3.3.0-alpha13",
-  "turner-jsdoc-template": "git+https://github.com/nijikokun/minami.git#master"
+  "minami": "git+https://github.com/nijikokun/minami.git#master"
 }
 ```
 
