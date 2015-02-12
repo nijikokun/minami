@@ -324,9 +324,6 @@ h6 {
 .prettyprint .linenums li:first-of-type code {
     padding-top: 15px;
 }
-.prettyprint .linenums li:last-of-type code {
-    padding-bottom: 15px;
-}
 .prettyprint code span.line {
     display: inline-block;
 }
