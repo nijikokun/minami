@@ -148,6 +148,7 @@ nav {
     display: block;
     width: 250px;
     background: #333;
+    overflow: auto;
 }
 nav ul {
     font-family: 'Lucida Grande', 'Lucida Sans Unicode', arial, sans-serif;
