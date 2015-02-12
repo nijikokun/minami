@@ -310,14 +310,22 @@ h6 {
 .prettyprint.source {
     width: inherit;
 }
-.prettyprint code {
+.prettyprint > code {
     font-size: 100%;
     line-height: 18px;
     display: block;
-    padding: 15px;
     margin: 0;
     background-color: #fff;
     color: #4D4E53;
+}
+.prettyprint .linenums code {
+    padding: 0 15px;
+}
+.prettyprint .linenums li:first-of-type code {
+    padding-top: 15px;
+}
+.prettyprint .linenums li:last-of-type code {
+    padding-bottom: 15px;
 }
 .prettyprint code span.line {
     display: inline-block;
