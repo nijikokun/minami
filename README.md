@@ -10,6 +10,12 @@ A clean, responsive documentation template theme for JSDoc 3.
 - [Underscore Template library](http://documentcloud.github.com/underscore/#template)
 - [Open Sans](http://www.google.com/fonts/specimen/Open+Sans)
 
+## Install
+
+```bash
+$ npm install --save-dev minami
+```
+
 ## Usage
 
 Clone repository to your designated `jsdoc` template directory, then:
@@ -20,16 +26,11 @@ $ jsdoc entry-file.js -t path/to/minami
 
 ### Node.js Dependency
 
-In your projects `package.json` file add a script and a dependency.
+In your projects `package.json` file add a generate script:
 
 ```json
 "script": {
   "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
-},
-
-"devDependencies": {
-  "jsdoc": "3.3.0-alpha13",
-  "minami": "git+https://github.com/nijikokun/minami.git#master"
 }
 ```
 

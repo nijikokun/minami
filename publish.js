@@ -136,7 +136,6 @@ function addNonParamAttributes(items) {
 
 function addSignatureParams(f) {
     var params = f.params ? addParamAttributes(f.params) : [];
-
     f.signature = util.format( '%s(%s)', (f.signature || ''), params.join(', ') );
 }
 
@@ -206,10 +205,11 @@ function getPathFromDoclet(doclet) {
         doclet.meta.filename;
 }
 
-function generate(title, docs, filename, resolveLinks) {
+function generate(type, title, docs, filename, resolveLinks) {
     resolveLinks = resolveLinks === false ? false : true;
 
     var docData = {
+        type: type,
         title: title,
         docs: docs
     };
@@ -242,8 +242,7 @@ function generateSourceFiles(sourceFiles, encoding) {
             logger.error('Error while generating source file %s: %s', file, e.message);
         }
 
-        generate('Source: ' + sourceFiles[file].shortened, [source], sourceOutfile,
-            false);
+        generate('Source', sourceFiles[file].shortened, [source], sourceOutfile, false);
     });
 }
 
@@ -557,8 +556,9 @@ exports.publish = function(taffyData, opts, tutorials) {
     members.tutorials = tutorials.children;
 
     // output pretty-printed source files by default
-    var outputSourceFiles = conf.default && conf.default.outputSourceFiles !== false ? true :
-        false;
+    var outputSourceFiles = conf.default && conf.default.outputSourceFiles !== false 
+        ? true 
+        : false;
 
     // add template helpers
     view.find = find;
@@ -577,13 +577,15 @@ exports.publish = function(taffyData, opts, tutorials) {
         generateSourceFiles(sourceFiles, opts.encoding);
     }
 
-    if (members.globals.length) { generate('Global', [{kind: 'globalobj'}], globalUrl); }
+    if (members.globals.length) { 
+        generate('', 'Global', [{kind: 'globalobj'}], globalUrl); 
+    }
 
     // index page displays information from package.json and lists files
-    var files = find({kind: 'file'}),
-        packages = find({kind: 'package'});
+    var files = find({kind: 'file'});
+    var packages = find({kind: 'package'});
 
-    generate('Home',
+    generate('', 'Home',
         packages.concat(
             [{kind: 'mainpage', readme: opts.readme, longname: (opts.mainpagetitle) ? opts.mainpagetitle : 'Main Page'}]
         ).concat(files),
@@ -600,32 +602,32 @@ exports.publish = function(taffyData, opts, tutorials) {
     Object.keys(helper.longnameToUrl).forEach(function(longname) {
         var myModules = helper.find(modules, {longname: longname});
         if (myModules.length) {
-            generate('Module: ' + myModules[0].name, myModules, helper.longnameToUrl[longname]);
+            generate('Module', myModules[0].name, myModules, helper.longnameToUrl[longname]);
         }
 
         var myClasses = helper.find(classes, {longname: longname});
         if (myClasses.length) {
-            generate('Class: ' + myClasses[0].name, myClasses, helper.longnameToUrl[longname]);
+            generate('Class', myClasses[0].name, myClasses, helper.longnameToUrl[longname]);
         }
 
         var myNamespaces = helper.find(namespaces, {longname: longname});
         if (myNamespaces.length) {
-            generate('Namespace: ' + myNamespaces[0].name, myNamespaces, helper.longnameToUrl[longname]);
+            generate('Namespace', myNamespaces[0].name, myNamespaces, helper.longnameToUrl[longname]);
         }
 
         var myMixins = helper.find(mixins, {longname: longname});
         if (myMixins.length) {
-            generate('Mixin: ' + myMixins[0].name, myMixins, helper.longnameToUrl[longname]);
+            generate('Mixin', myMixins[0].name, myMixins, helper.longnameToUrl[longname]);
         }
 
         var myExternals = helper.find(externals, {longname: longname});
         if (myExternals.length) {
-            generate('External: ' + myExternals[0].name, myExternals, helper.longnameToUrl[longname]);
+            generate('External', myExternals[0].name, myExternals, helper.longnameToUrl[longname]);
         }
 
         var myInterfaces = helper.find(interfaces, {longname: longname});
         if (myInterfaces.length) {
-            generate('Interface: ' + myInterfaces[0].name, myInterfaces, helper.longnameToUrl[longname]);
+            generate('Interface', myInterfaces[0].name, myInterfaces, helper.longnameToUrl[longname]);
         }
     });
 
@@ -638,12 +640,11 @@ exports.publish = function(taffyData, opts, tutorials) {
             children: tutorial.children
         };
 
-        var tutorialPath = path.join(outdir, filename),
-            html = view.render('tutorial.tmpl', tutorialData);
+        var tutorialPath = path.join(outdir, filename);
+        var html = view.render('tutorial.tmpl', tutorialData);
 
         // yes, you can use {@link} in tutorials too!
         html = helper.resolveLinks(html); // turn {@link foo} into <a href="foodoc.html">foo</a>
-
         fs.writeFileSync(tutorialPath, html, 'utf8');
     }
 
@@ -654,5 +655,6 @@ exports.publish = function(taffyData, opts, tutorials) {
             saveChildren(child);
         });
     }
+    
     saveChildren(tutorials);
 };
