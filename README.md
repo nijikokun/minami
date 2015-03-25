@@ -74,4 +74,4 @@ In your `.jsdoc.json` file, add a template option.
 
 ## License
 
-Licensed under the MIT license.
+Licensed under the Apache2 license.

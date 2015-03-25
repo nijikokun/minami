@@ -11,7 +11,10 @@
     "url": "https://github.com/Nijikokun/minami.git"
   },
   "author": "Nijiko Yonskai <nijikokun@gmail.com>",
-  "license": "MIT",
+  "licenses": [{
+    "type": "Apache-2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  }],
   "bugs": {
     "url": "https://github.com/Nijikokun/minami/issues"
   },
