@@ -8,7 +8,7 @@ A clean, responsive documentation template theme for JSDoc 3.
 
 - [the Taffy Database library](http://taffydb.com/)
 - [Underscore Template library](http://documentcloud.github.com/underscore/#template)
-- [Open Sans](http://www.google.com/fonts/specimen/Open+Sans)
+- [Montserrat](http://www.google.com/fonts/specimen/Monsterrat) & Helvetica Neue
 
 ## Install
 
