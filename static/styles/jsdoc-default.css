@@ -1,50 +1,4 @@
-@font-face {
-  font-family: 'Open Sans';
-  font-weight: normal;
-  font-style: normal;
-  src: url('../fonts/OpenSans-Regular-webfont.eot');
-  src: local('Open Sans'), local('OpenSans'), url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-Regular-webfont.woff') format('woff'), url('../fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
-}
-
-@font-face {
-  font-family: 'Open Sans';
-  font-weight: 300;
-  font-style: normal;
-  src: url('../fonts/OpenSans-Light-webfont.eot');
-  src: local('Open Sans Light'), local('OpenSans Light'), url('../fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-Light-webfont.woff') format('woff'), url('../fonts/OpenSans-Light-webfont.svg#open_sanslight') format('svg');
-}
-
-@font-face {
-  font-family: 'Open Sans';
-  font-weight: 600;
-  font-style: normal;
-  src: url('../fonts/OpenSans-Semibold-webfont.eot');
-  src: local('Open Sans Semibold'), local('OpenSans Semibold'), url('../fonts/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-Semibold-webfont.woff') format('woff'), url('../fonts/OpenSans-Semibold-webfont.svg#open_sanslight') format('svg');
-}
-
-@font-face {
-  font-family: 'Open Sans';
-  font-weight: 600;
-  font-style: italic;
-  src: url('../fonts/OpenSans-SemiboldItalic-webfont.eot');
-  src: local('Open Sans Semibold Italic'), local('OpenSans SemiboldItalic'), url('../fonts/OpenSans-SemiboldItalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-SemiboldItalic-webfont.woff') format('woff'), url('../fonts/OpenSans-SemiboldItalic-webfont.svg#open_sanslight') format('svg');
-}
-
-@font-face {
-  font-family: 'Open Sans';
-  font-weight: 700;
-  font-style: normal;
-  src: url('../fonts/OpenSans-Bold-webfont.eot');
-  src: local('Open Sans Bold'), local('OpenSans Bold'), url('../fonts/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-Bold-webfont.woff') format('woff'), url('../fonts/OpenSans-Bold-webfont.svg#open_sanslight') format('svg');
-}
-
-@font-face {
-  font-family: 'Open Sans';
-  font-weight: 700;
-  font-style: italic;
-  src: url('../fonts/OpenSans-BoldItalic-webfont.eot');
-  src: local('Open Sans Bold Italic'), local('OpenSans BoldItalic'), url('../fonts/OpenSans-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-BoldItalic-webfont.woff') format('woff'), url('../fonts/OpenSans-BoldItalic-webfont.svg#open_sanslight') format('svg');
-}
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 * {
   box-sizing: border-box
@@ -58,17 +12,16 @@ html, body {
 body {
   color: #4d4e53;
   background-color: white;
-  
-  width: 920px;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 20px;
 
-  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 16px;
   line-height: 160%;
 }
 
-a, a:visited, a:active {
+a,
+a:active {
   color: #0095dd;
   text-decoration: none;
 }
@@ -81,29 +34,35 @@ p, ul, ol, blockquote {
   margin-bottom: 1em;
 }
 
-h1, h2, h3, h4 {
-  font-weight: 600;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #000;
+  font-weight: 400;
   margin: 0;
 }
 
 h1 {
   font-weight: 300;
   font-size: 48px;
-  margin: 1em 0 .3em;
+  margin: 1em 0 .5em;
 }
 
 h1.page-title {
+  font-size: 48px;
   margin: 1em 30px;
 }
 
 h2 {
-  font-size: 28px;
-  margin: 1em 0 .2em;
+  font-size: 24px;
+  margin: 1.5em 0 .3em;
 }
 
 h3 {
   font-size: 24px;
-  margin: 1em 0 .2em;
+  margin: 1.2em 0 .3em;
 }
 
 h4 {
@@ -114,7 +73,6 @@ h4 {
 
 h5, .container-overview .subsection-title {
   font-size: 120%;
-  font-weight: bold;
   letter-spacing: -0.01em;
   margin: 8px 0 3px 0;
 }
@@ -127,7 +85,10 @@ h6 {
 }
 
 tt, code, kbd, samp {
-  font-family: Consolas, Monaco, 'Andale Mono', monospace
+  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+  background: #f4f4f4;
+  padding: 1px 5px;
+  border-radius: 5px;
 }
 
 .class-description {
@@ -142,7 +103,9 @@ tt, code, kbd, samp {
 }
 
 #main {
-  margin-left: 250px
+  float: left;
+  min-width: 360px;
+  width: calc(100% - 250px);
 }
 
 header {
@@ -167,44 +130,69 @@ section {
 }
 
 nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
+  float: left;
   display: block;
   width: 250px;
-  background: #333;
+  background: #fff;
   overflow: auto;
 }
 
+nav h3 {
+  margin-top: 12px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  line-height: 24px;
+  margin: 15px 0 10px;
+  padding: 0;
+  color: #000;
+}
+
 nav ul {
-   font-family: 'Lucida Grande', 'Lucida Sans Unicode', arial, sans-serif;
-   font-size: 100%;
-   line-height: 17px;
-   padding: 0;
-   margin: 0;
-   list-style-type: none;
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', arial, sans-serif;
+  font-size: 100%;
+  line-height: 17px;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
 }
 
-nav ul a, nav ul a:visited, nav ul a:active {
-   font-family: Consolas, Monaco, 'Andale Mono', monospace;
-   line-height: 18px;
-   color: hsl(207, 1%, 60%);
-   padding: 0 10px;
-   display: block;
-   font-size: 12px;
+nav ul a,
+nav ul a:active {
+  font-family: 'Montserrat', sans-serif;
+  line-height: 18px;
+  padding: 0;
+  display: block;
+  font-size: 12px;
 }
 
-nav ul a:hover, nav ul a:active {
-   background: hsl(0, 0%, 22%)
+nav ul a:hover,
+nav ul a:active {
+  color: hsl(200, 100%, 43%);
+  text-decoration: none;
+}
+
+nav > ul {
+  padding: 0 10px;
+}
+
+nav > ul > li > a {
+  color: #000;
 }
 
 nav ul ul {
-   margin-bottom: 10px
+  margin-bottom: 10px
 }
 
 nav ul ul a {
-   padding-left: 20px
+  color: hsl(207, 1%, 60%);
+  border-left: 1px solid hsl(207, 10%, 86%);
+}
+
+nav ul ul a,
+nav ul ul a:active {
+  padding-left: 20px
 }
 
 nav h2 {
@@ -214,22 +202,9 @@ nav h2 {
 }
 
 nav > h2 > a {
-   padding: 10px;
    display: block;
-   background: hsl(202, 71%, 34%);
-   color: hsl(0, 100%, 100%) !important;
-}
-
-nav h3 {
-   margin-top: 12px;
-   font-size: 10px;
-   text-transform: uppercase;
-   letter-spacing: 1px;
-   font-weight: 600;
-   line-height: 24px;
-   margin: 15px 0 0;
-   padding: 0 10px;
-   color: #FFF;
+   margin: 10px 0 -10px;
+   color: hsl(202, 71%, 50%) !important;
 }
 
 footer {
@@ -334,7 +309,7 @@ footer {
   font-size: 100%;
   line-height: 18px;
   display: block;
-  margin: 0;
+  margin: 0 30px;
   background-color: #fff;
   color: #4D4E53;
 }
@@ -389,6 +364,7 @@ footer {
   border-radius: 3px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   width: 100%;
+  font-size: 14px;
 }
 
 .params .name, .props .name, .name code {
@@ -445,4 +421,168 @@ dl.param-type {
 
 .disabled {
   color: #454545
+}
+
+/* navicon button */
+.navicon-button {
+  display: none;
+  position: relative;
+  padding: 2.0625rem 1.5rem;
+  transition: 0.25s;
+  cursor: pointer;
+  user-select: none;
+  opacity: .8;
+}
+.navicon-button .navicon:before, .navicon-button .navicon:after {
+  transition: 0.25s;
+}
+.navicon-button:hover {
+  transition: 0.5s;
+  opacity: 1;
+}
+.navicon-button:hover .navicon:before, .navicon-button:hover .navicon:after {
+  transition: 0.25s;
+}
+.navicon-button:hover .navicon:before {
+  top: .825rem;
+}
+.navicon-button:hover .navicon:after {
+  top: -.825rem;
+}
+
+/* navicon */
+.navicon {
+  position: relative;
+  width: 2.5em;
+  height: .3125rem;
+  background: #000;
+  transition: 0.3s;
+  border-radius: 2.5rem;
+}
+.navicon:before, .navicon:after {
+  display: block;
+  content: "";
+  height: .3125rem;
+  width: 2.5rem;
+  background: #000;
+  position: absolute;
+  z-index: -1;
+  transition: 0.3s 0.25s;
+  border-radius: 1rem;
+}
+.navicon:before {
+  top: .625rem;
+}
+.navicon:after {
+  top: -.625rem;
+}
+
+/* open */
+.nav-trigger:checked + label:not(.steps) .navicon:before,
+.nav-trigger:checked + label:not(.steps) .navicon:after {
+  top: 0 !important;
+}
+
+.nav-trigger:checked + label .navicon:before,
+.nav-trigger:checked + label .navicon:after {
+  transition: 0.5s;
+}
+
+/* Minus */
+.nav-trigger:checked + label {
+  transform: scale(0.75);
+}
+
+/* × and + */
+.nav-trigger:checked + label.plus .navicon,
+.nav-trigger:checked + label.x .navicon {
+  background: transparent;
+}
+
+.nav-trigger:checked + label.plus .navicon:before,
+.nav-trigger:checked + label.x .navicon:before {
+  transform: rotate(-45deg);
+  background: #FFF;
+}
+
+.nav-trigger:checked + label.plus .navicon:after,
+.nav-trigger:checked + label.x .navicon:after {
+  transform: rotate(45deg);
+  background: #FFF;
+}
+
+.nav-trigger:checked + label.plus {
+  transform: scale(0.75) rotate(45deg);
+}
+
+.nav-trigger:checked ~ nav {
+  left: 0 !important;
+}
+
+.nav-trigger:checked ~ .overlay {
+  display: block;
+}
+
+.nav-trigger {
+  position: fixed;
+  top: 0;
+  clip: rect(0, 0, 0, 0);
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: hsla(0, 0%, 0%, 0.5);
+  z-index: 1;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 680px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  nav {
+    background: #FFF;
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: -250px;
+    z-index: 3;
+    padding: 0 10px;
+    transition: left 0.2s;
+  }
+
+  .navicon-button {
+    display: inline-block;
+    position: fixed;
+    top: 1.5em;
+    right: 0;
+    z-index: 2;
+  }
+
+  #main {
+    width: 100%;
+    min-width: 360px;
+  }
+
+  #main h1.page-title {
+    margin: 1em 0;
+  }
+
+  #main section {
+    padding: 0;
+  }
+
+  footer {
+    margin-left: 0;
+  }
 }
