@@ -1,5 +1,6 @@
 {
   "configHelpUrl": "http://usejsdoc.org/about-configuring-jsdoc.html",
+  "script": "jsdoc --configure ./node_modules/loke-jsdoc-theme/default.jsdoc.json --verbose",
   "tags": {
     "allowUnknownTags": true,
     "dictionaries": ["jsdoc", "closure"]
