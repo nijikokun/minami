@@ -294,8 +294,20 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
         var itemsNav = '';
 
         items.forEach(function(item) {
-            var methods = find({kind:'function', memberof: item.longname});
-            var members = find({kind:'member', memberof: item.longname});
+            var isRpc = item.kind === 'rpc';
+            console.log('isRpc: ', isRpc);
+            var longname = isRpc ? item.base : item.longname;
+
+            var methodquery = {kind:'function', memberof: item.longname};
+            var memberquery = {kind:'member', memberof: item.longname};
+
+            if (isRpc) {
+                methodquery.rpc = {isUndefined: false};
+                memberquery.rpc = {isUndefined: false};
+            }
+
+            var methods = find(methodquery);
+            var members = find(memberquery);
 
             if ( !hasOwnProp.call(item, 'longname') ) {
                 itemsNav += '<li>' + linktoFn('', item.name);
@@ -306,8 +318,11 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
                     itemsNav += "<ul class='methods'>";
 
                     methods.forEach(function (method) {
+                        var name = isRpc ?
+                            (typeof method.rpc === 'string') ? method.rpc : method.name :
+                            method.name;
                         itemsNav += "<li data-type='method'>";
-                        itemsNav += linkto(method.longname, method.name);
+                        itemsNav += linkto(method.longname, name);
                         itemsNav += "</li>";
                     });
 
@@ -352,8 +367,26 @@ function buildNav(members) {
     var nav = '<h2><a href="index.html">Home</a></h2>';
     var seen = {};
     var seenTutorials = {};
+    var seenRpc = {};
+
+    members.rpc = members.classes
+    .filter(function(doclet) { return doclet.rpc; })
+    .map(function(doclet) {
+        // create a new doclet... map some attributes
+        return {
+            kind: 'rpc',
+            comment: doclet.comment,
+            meta: doclet.meta,
+            description: doclet.description,
+            name: (typeof doclet.rpc === 'string') ? doclet.rpc : doclet.name,
+            longname: doclet.longname,
+            scope: doclet.scope
+        };
+    });
+
 
     nav += buildMemberNav(members.tutorials, 'Tutorials', seenTutorials, linktoTutorial);
+    nav += buildMemberNav(members.rpc, 'RPC', seenRpc, linkto);
     nav += buildMemberNav(members.namespaces, 'Namespaces', seen, linkto);
     nav += buildMemberNav(members.interfaces, 'Interfaces', seen, linkto);
     nav += buildMemberNav(members.events, 'Events', seen, linkto);
@@ -361,6 +394,9 @@ function buildNav(members) {
     nav += buildMemberNav(members.classes, 'Classes', seen, linkto);
     nav += buildMemberNav(members.externals, 'Externals', seen, linktoExternal);
     nav += buildMemberNav(members.mixins, 'Mixins', seen, linkto);
+
+    // ignore globals for now... they make a big mess
+    return nav;
 
     if (members.globals.length) {
         var globalNav = '';
