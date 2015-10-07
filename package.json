@@ -1,6 +1,6 @@
 {
   "name": "loke-jsdoc-theme",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Modified version of the minami JSDoc theme for LOKE apps",
   "main": "publish.js",
   "scripts": {
