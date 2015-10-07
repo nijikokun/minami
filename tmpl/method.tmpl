@@ -1,3 +1,4 @@
+<div class="method-details">
 <?js
 var data = obj;
 var self = this;
@@ -14,6 +15,27 @@ var self = this;
     <p class="summary"><?js= summary ?></p>
     <?js } ?>
 <?js } ?>
+
+
+
+<?js if (data.rpc) {
+    if (data.kind === 'class') {
+        ?><span class="label label-primary">RPC: <?js= typeof data.rpc === 'string' ? data.rpc : data.name ?></span><?js
+    } else {
+        ?><span class="label label-info">RPC: <?js= typeof data.rpc === 'string' ? data.rpc : data.name ?></span><?js
+    }
+} ?>
+
+<?js if (data.async) {
+    ?><span class="label label-default">Async</span><?js
+} ?>
+
+<?js if (data.timeout) {
+    ?><span class="label label-warning">Timeout: <?js= data.timeout ?>ms</span><?js
+} ?>
+
+
+
 
 <?js if (data.kind !== 'module' && data.description) { ?>
 <div class="description">
@@ -76,30 +98,29 @@ var self = this;
 <?js } ?>
 
 <?js if (data.exceptions && exceptions.length) { ?>
-<h5>Throws:</h5>
-<?js if (exceptions.length > 1) { ?><ul><?js
-    exceptions.forEach(function(r) { ?>
-        <li><?js= self.partial('exceptions.tmpl', r) ?></li>
-    <?js });
-?></ul><?js } else {
-    exceptions.forEach(function(r) { ?>
-        <?js= self.partial('exceptions.tmpl', r) ?>
-    <?js });
-} } ?>
+    <h5>Throws:</h5>
+    <?js= self.partial('exceptions.tmpl', data.exceptions) ?>
+<?js } ?>
 
 <?js if (data.returns && returns.length) { ?>
 <h5>Returns:</h5>
 <?js if (returns.length > 1) { ?><ul><?js
     returns.forEach(function(r) { ?>
-        <li><?js= self.partial('returns.tmpl', r) ?></li>
+        <li>
+            <?js= self.partial('returns.tmpl', r) ?>
+        </li>
     <?js });
 ?></ul><?js } else {
+
     returns.forEach(function(r) { ?>
         <?js= self.partial('returns.tmpl', r) ?>
     <?js });
+
 } } ?>
 
 <?js if (data.examples && examples.length) { ?>
     <h5>Example<?js= examples.length > 1? 's':'' ?></h5>
     <?js= this.partial('examples.tmpl', examples) ?>
 <?js } ?>
+
+</div>
