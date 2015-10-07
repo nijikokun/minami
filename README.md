@@ -1,22 +1,19 @@
-# Minami
+# LOKE 
 
-A clean, responsive documentation template theme for JSDoc 3.
+Based on Minami - A clean, responsive documentation template theme for JSDoc 3.
+
+*TODO: show LOKE theme... the following is the original Minami.*
 
 ![Minami Screenshot](http://puu.sh/gOyNe/66c3adcb97.png)
 
-## Uses
-
-- [the Taffy Database library](http://taffydb.com/)
-- [Underscore Template library](http://documentcloud.github.com/underscore/#template)
-- [Montserrat](http://www.google.com/fonts/specimen/Monsterrat) & Helvetica Neue
 
 ## Install
 
 ```bash
-$ npm install --save-dev minami
+$ npm install --save-dev loke-jsdoc-theme
 ```
 
-## Usage
+## Basic Usage
 
 Clone repository to your designated `jsdoc` template directory, then:
 
@@ -24,53 +21,23 @@ Clone repository to your designated `jsdoc` template directory, then:
 $ jsdoc entry-file.js -t path/to/minami
 ```
 
-### Node.js Dependency
+### Package.json Usage
 
 In your projects `package.json` file add a generate script:
 
 ```json
 "script": {
-  "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
+  "generate-docs": "jsdoc --configure node_modules/loke-jsdoc-theme/default.jsdoc.json --verbose"
 }
 ```
 
-In your `.jsdoc.json` file, add a template option.
-
-```json
-"opts": {
-  "template": "node_modules/minami"
-}
+To build docs run:
+```bash
+$ npm run generate-docs
 ```
 
-### Example JSDoc Config
+Alternatively copy the default configuration file from the NPM package to the project folder and customise it. See http://usejsdoc.org/about-configuring-jsdoc.html
 
-```json
-{
-    "tags": {
-        "allowUnknownTags": true,
-        "dictionaries": ["jsdoc"]
-    },
-    "source": {
-        "include": ["lib", "package.json", "README.md"],
-        "includePattern": ".js$",
-        "excludePattern": "(node_modules/|docs)"
-    },
-    "plugins": [
-        "plugins/markdown"
-    ],
-    "templates": {
-        "cleverLinks": false,
-        "monospaceLinks": true
-    },
-    "opts": {
-        "destination": "./docs/",
-        "encoding": "utf8",
-        "private": true,
-        "recurse": true,
-        "template": "./node_modules/minami"
-    }
-}
-```
 
 ## License
 
