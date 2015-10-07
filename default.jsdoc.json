@@ -13,7 +13,9 @@
   },
   "plugins": [
     "plugins/markdown",
-    "plugins/summarize"
+    "./node_modules/loke-jsdoc-theme/plugins/async",
+    "./node_modules/loke-jsdoc-theme/plugins/rpc",
+    "./node_modules/loke-jsdoc-theme/plugins/timeout"
   ],
   "markdown": {
     "excludeTags": ["author"]

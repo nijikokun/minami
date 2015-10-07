@@ -1,6 +1,5 @@
 exports.defineTags = function(dictionary) {
     dictionary.defineTag('rpc', {
-      //mustHaveValue: true,
       onTagged: handleRpcTag
     });
 };
