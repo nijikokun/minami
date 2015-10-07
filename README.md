@@ -1,4 +1,4 @@
-# LOKE 
+# LOKE JSDoc Theme
 
 Based on Minami - A clean, responsive documentation template theme for JSDoc 3.
 
@@ -18,7 +18,7 @@ $ npm install --save-dev loke-jsdoc-theme
 Clone repository to your designated `jsdoc` template directory, then:
 
 ```bash
-$ jsdoc entry-file.js -t path/to/minami
+$ jsdoc /my/code.js -t path/to/theme
 ```
 
 ### Package.json Usage
