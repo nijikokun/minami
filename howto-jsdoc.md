@@ -39,8 +39,8 @@ module should simply describe the purpose and reference the injected service).
 ```
 
 **IMPORTANT: when declaring `@module` on a file, all classes documented within
-will be recorded as a part of that module. AVOID THIS and define the classes
-elsewhere (ie keep the modules VERY light).**
+the same file will be recorded as a part of that module. AVOID THIS and define
+the classes elsewhere (ie keep the modules VERY light).**
 **The reason for this is that it changes the name required to reference the class
 that will likely lead to mistakes and broken links.**.
 
