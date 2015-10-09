@@ -15,6 +15,7 @@
     "plugins/markdown",
     "./node_modules/loke-jsdoc-theme/plugins/async",
     "./node_modules/loke-jsdoc-theme/plugins/rpc",
+    "./node_modules/loke-jsdoc-theme/plugins/api",
     "./node_modules/loke-jsdoc-theme/plugins/timeout"
   ],
   "markdown": {
