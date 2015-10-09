@@ -47,6 +47,7 @@ that will likely lead to mistakes and broken links.**.
 To demonstrate:
 ```js
 /**
+ * This is a test module
  * @module test
  */
 
@@ -154,9 +155,35 @@ Option 1: prefix with with `Class#`
 UserEntity.prototype.sendNotification: function() { }
 ```
 
+Option 2: use the `@memberof` or `@lends` tag (either work)
+
+```js
+/**
+ * Sends a notification to the user
+ * @method sendNotification
+ * @memberof UserEntity#
+ */
+UserEntity.prototype.sendNotification: function() { }
+```
+
 ### Static methods
 
-Document
+Use all of the same options as instance methods, except replace `#` with `.`:
+
+```js
+/**
+ * Does stuff
+ * @method UserEntity.doStuff
+ */
+UserEntity.doStuff: function() { }
+
+/**
+ * Does things
+ * @method doThings
+ * @memberof UserEntity.
+ */
+UserEntity.doThings: function() { }
+```
 
 ### Method parameters and return values
 
