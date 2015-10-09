@@ -221,6 +221,21 @@ function doStuffAndThings(id) { }
 
 See the notes on `@params` in the Types section below.
 
+### Exceptions
+
+Use the `@throws` tag to communicate to other developers what sort of errors
+are thrown from a particular method.
+
+```js
+/**
+ * Sends a notification to the user
+ * @method UserEntity#sendNotification
+ * @throws {NoEmailError} the user does not have an email address associated
+ *                        with their account
+ */
+function sendNotification() { }
+```
+
 ## Documenting members of classes
 
 Use the `@member` tag
@@ -336,6 +351,31 @@ You can also document route parameters with the `@apiparam` tag.
  * @apiparam {integer} id - the user's unique ID
  */
 function getUser(req, res, next) { }
+```
+
+Any query string parameters with `@apiquery`. The following can be used like
+`GET /v1/users?max=100`:
+
+```js
+/**
+ * Gets users
+ * @method TestController#getUsers
+ * @api GET /v1/users
+ * @apiquery {integer} max - limit the number of results
+ */
+function getUsers(req, res, next) { }
+```
+
+For POST/PATCH/PUT requests specify the posted data in `@apibody`:
+
+```js
+/**
+ * Creates a new user
+ * @method TestController#createUser
+ * @api POST /v1/users
+ * @apibody {UserDetails} details of the user to create
+ */
+function createUser(req, res, next) { }
 ```
 
 # TODO Notes
