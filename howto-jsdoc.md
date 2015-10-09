@@ -280,6 +280,9 @@ Instead, keep all classes at the global level so they can be referenced like:
 Add the `@rpc` to the service. If the name is different to the class (which it
 probably is) then specify the service name afterwards.
 
+This will result with navigation items being created that link back to the actual
+class, and a label listing this on the class documentation.
+
 ```js
 /**
  * Test class
@@ -292,6 +295,9 @@ probably is) then specify the service name afterwards.
 
 Add the `@rpc` to the method. If the RPC method name is different to the actual
 method then specify the service name afterwards.
+
+This will result with navigation items being created that link back to the actual
+method, and a label listing this on the method documentation.
 
 ```js
 /**
@@ -328,6 +334,10 @@ function getUser(req, res, next) { }
 ```
 
 # TODO Notes
+
+Use the `@todo` tag to list TODO information. At present these are listed with
+the classes, methods, etc. In the future the theme will provide an index to all
+of the items on a single page.
 
 # Types
 
