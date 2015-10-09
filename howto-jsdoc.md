@@ -217,6 +217,10 @@ Example:
 function doStuffAndThings(id) { }
 ```
 
+### Method Parameters
+
+See the notes on `@params` in the Types section below.
+
 ## Documenting members of classes
 
 Use the `@member` tag
