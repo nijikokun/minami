@@ -1,3 +1,5 @@
+# Intro
+
 Javascript is a hard language to document, and JSDoc is full of weird quirks
 because of this. The following standards have been compiled from playing with
 various approaches to using JSDoc with an attempt to make something that is
