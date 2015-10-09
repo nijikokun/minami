@@ -316,17 +316,18 @@ Add the `@api` or `@route` to the function followed by the route.
 ```js
 /**
  * Gets all users
- * @method TestController#listUsers
+ * @method TestController#getUsers
  * @api GET /v1/users
  */
 function getUsers(req, res, next) { }
 ```
 
 You can also document route parameters with the `@apiparam` tag.
+
 ```js
 /**
  * Gets a single user
- * @method TestController#listUsers
+ * @method TestController#getUser
  * @api GET /v1/users/:id
  * @apiparam {integer} id - the user's unique ID
  */
@@ -341,4 +342,166 @@ of the items on a single page.
 
 # Types
 
-Arrays, generics, nullable, not null, etc
+As noted in Namespaces and Modules do not attach classes and other types to these.
+
+[See this link for more examples.](http://usejsdoc.org/tags-type.html)
+
+Some useful ones:
+
+```js
+// nullable
+{?string}
+
+// not nullable
+{!string}
+
+// various
+{(string|number)}
+
+```
+
+## Mixed Type
+
+Sometimes an argument in Javascript can be anything. Use `{*}`, example:
+
+```js
+/**
+ * @param {*} foo
+ */
+function bar(foo) {}
+```
+
+This is equivalent to `{null|undefined|String|Number|Object}`.
+
+*Note: this is part of the closure compiler dictionary, not the standard JSDoc
+dictionary*
+
+## Promises
+
+Represents a promise that resolves with a user:
+
+```js
+Promise<User>
+```
+
+## Arrays & Dictionaries or Hash-maps
+
+Represents an array of strings:
+
+```js
+{Array<string>}
+
+// or
+
+{string[]}
+```
+
+Represents a key-value collection of numbers:
+
+```js
+{Object<string, number>}
+```
+
+## Callback Types
+
+Callbacks are common in javascript. Document them with the `@callback` tag.
+
+If the callback is a common signature define it once and reuse it wherever
+necessary.
+
+```js
+/**
+ * @callback NodeCallback
+ * @param {?Error} err - if an error occurred
+ * @param {*} result - the result
+ */
+```
+
+## Custom Types
+
+If a document is a POJSO (it's a real term) then defining a class is likely
+overkill. Instead define a type.
+
+Use `@typedef`:
+
+```js
+/**
+ * @typedef UserDetails
+ * @type {Object}
+ * @property {string} id - an ID.
+ * @property {string} name - your name.
+ * @property {number} age - your age.
+ */
+
+// then use in a function
+
+/**
+ * @param {UserDetails} user - user details
+ */
+function doStuff(user) { }
+```
+
+## Parameters
+
+Parameters are defined as additional tags on the method or constructor. Use the
+`@param` tag, example:
+
+```js
+/**
+ * @param {number} myParam - this is my param
+ */
+function myFun(myParam) { }
+```
+
+### Optional Parameters
+
+```js
+// preferred
+/**
+ * @param {number} [foo]
+ */
+
+// alt
+/**
+ * @param {number=} foo
+ */
+```
+
+### Default values
+```js
+/**
+ * @param {number} [foo=1]
+ */
+```
+
+### Variable number of params
+
+```js
+/**
+ * @param {...number} num - variable number of numeric parameters
+ */
+```
+
+## Variables
+
+Sometimes it is useful to indicate the type of a variable, especially with
+integers and floats. This won't be published in the theme built docs, but since
+javascript doesn't enforce types it is helpful in communicating with other
+developers as to the intent of the variable.
+
+```js
+/** @type integer */
+var total;
+```
+
+## Constant / Readonly Variables
+
+Use `@const` with `@type`:
+
+```js
+/**
+ * @type {number}
+ * @const
+ */
+var FOO = 1;
+```
