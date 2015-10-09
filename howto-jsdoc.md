@@ -284,7 +284,20 @@ probably is) then specify the service name afterwards.
 /**
  * Test class
  * @class TestService
- * @rpc Test
+ * @rpc test
+ */
+```
+
+## Method Exposed by RPC
+
+Add the `@rpc` to the method. If the RPC method name is different to the actual
+method then specify the service name afterwards.
+
+```js
+/**
+ * Does stuff
+ * @method TestService#doStuff
+ * @rpc dostuff
  */
 ```
 
