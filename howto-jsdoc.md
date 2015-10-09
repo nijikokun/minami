@@ -219,14 +219,28 @@ function doStuffAndThings(id) { }
 
 ## Documenting members of classes
 
-Use the `@method` tag
+Use the `@member` tag
 
 ```js
 /**
- * Sends a notification to the user
- * @method UserEntity#sendNotification
+ * Represents a user
+ * @class UserEntity
  */
-UserEntity.prototype.sendNotification: function() { }
+function UserEntity(name) {
+  /**
+   * The user's name
+   * @member {string} UserEntity#name
+   */
+  this.name = name;
+
+  // you can use use @memberof or @lends
+  /**
+   * The user's gender
+   * @member {string} gender
+   * @memberof UserEntity#
+   */
+  this.gender = 'unknown';
+}
 ```
 
 ## Namespaces and Modules
