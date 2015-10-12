@@ -141,7 +141,7 @@ var user = {
 
 ## Documenting methods on classes
 
-Always use the `@method` tag.
+There are a lot of ways to do this, but always use the `@method` tag.
 
 ### Instance methods
 
@@ -164,6 +164,61 @@ Option 2: use the `@memberof` or `@lends` tag (either work)
  * @memberof UserEntity#
  */
 UserEntity.prototype.sendNotification: function() { }
+```
+
+**TIP 1:**
+
+ES5 prototype methods don't need anything but the comment (and the `@param`s if
+any). JSDoc can figure out that it's an instance member of the class.
+
+```js
+/** Sends a notification to the user */
+UserEntity.prototype.sendNotification: function() { }
+```
+
+**TIP 2:**
+
+If a factory is used JSDoc can't figure out if a method is an instance or static.
+All that needs to be specified is `@memberof` with `#` to indicate instance.
+
+```js
+/**
+ * User entity
+ * @constructs UserEntity
+ */
+function createUser() {
+  return {
+    /**
+     * Sends a notification to the user
+     * @memberof UserEntity#
+     */
+    sendNotification: function() { }
+  };
+}
+```
+
+**TIP 3:**
+
+If referencing another function then you will need to specify `@method` so that
+JSDoc knows it's not a `@member`.
+JSDoc can figure out the name, but you'll need `@memberof` unless it's a prototype
+method.
+
+```js
+/**
+ * User entity
+ * @constructs UserEntity
+ */
+function createUser() {
+  return {
+    /**
+     * Sends a notification to the user
+     * @method
+     * @memberof UserEntity#
+     */
+    sendNotification: sendNotification
+  };
+}
 ```
 
 ### Static methods
@@ -538,7 +593,7 @@ developers as to the intent of the variable.
 var total;
 ```
 
-## Constant / Readonly Variables
+## Constants, Read-only Variables and Getters
 
 Use `@const` with `@type`:
 
@@ -549,3 +604,20 @@ Use `@const` with `@type`:
  */
 var FOO = 1;
 ```
+
+For getters or read-only variables use `@readonly`.
+You'll also need to be explicit with the `@member` tag:
+
+```js
+/**
+ * Gets a value that is mine
+ * @member MyClass#myValue
+ * @readonly
+ */
+Object.defineProperty(this, 'myValue', {get: getMyValue});
+```
+
+## ES6
+
+Full ES6 is coming in JSDoc 3.4. Until then it is possible to use the plugin on
+NPM called `jsdoc-babel`.
