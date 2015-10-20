@@ -290,7 +290,7 @@ function attachModuleSymbols(doclets, modules) {
 function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
     var nav = '';
 
-    if (items.length) {
+    if (items && items.length) {
         var itemsNav = '';
 
         items.forEach(function(item) {
