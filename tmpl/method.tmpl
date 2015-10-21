@@ -43,13 +43,7 @@ if (data.rpc) {
 } ?>
 
 <?js if (data.rpc) {
-    if (data.kind === 'class') {
-        ?>
-        <a href="#api-<?js= data.name ?>">
-          <span class="label label-rpc">RPC: <?js= typeof data.rpc === 'string' ? data.rpc : data.name ?></span>
-        </a>
-        <?js
-    } else {
+    if (data.kind !== 'class') {
         ?>
         <a href="#api-<?js= data.name ?>">
           <span class="label label-rpc">RPC: <?js= typeof data.rpc === 'string' ? data.rpc : data.name ?></span>
@@ -170,19 +164,31 @@ if (data.rpc) {
       API Route:
       <?js= data.route ?>
     </h5>
-    <?js
-    if (data.routeParams && data.routeParams.length) { ?>
+
+    <?js if (data.routeParams && data.routeParams.length) { ?>
         <h6>Route Params</h6>
         <?js= this.partial('params.tmpl', data.routeParams.map(function(p) { return p.value; })) ?>
     <?js } ?>
-    <h6>Query Params</h6>
-    <h6>Body</h6>
-    <h6>Response</h6>
+
+    <?js if (data.queryParams && data.queryParams.length) { ?>
+        <h6>Query Params</h6>
+        <?js= this.partial('params.tmpl', data.queryParams.map(function(p) { return p.value; })) ?>
+    <?js } ?>
+
+    <?js if (data.body) { ?>
+        <h6>Body</h6>
+        <?js= self.partial('returns.tmpl', data.body) ?>
+    <?js } ?>
+
+    <?js if (data.response) { ?>
+        <h6>Response</h6>
+        <?js= self.partial('returns.tmpl', data.response) ?>
+    <?js } ?>
   </div>
 <?js } ?>
 
 
-<?js if (data.rpc) { ?>
+<?js if (data.rpc && data.kind !== 'class') { ?>
   <div class="bs-callout bs-callout-rpc">
     <h5>
       RPC: <?js= data.rpc ?>

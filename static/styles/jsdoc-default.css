@@ -591,6 +591,7 @@ section article hr {
 
 h1.page-title {
   float: right;
+  text-align: right;
   color: #f5f5f5;
   margin: 15px;
   font-style: italic;
@@ -601,6 +602,21 @@ h2 {
   color: #666;
   text-transform: uppercase;
   margin-bottom: 1em;
+  clear: both;
+}
+
+h2 span.ancestors {
+  font-size: 0.5em;
+  display: block;
+}
+
+h2 span.ancestors a {
+  color: #ccc !important;
+}
+
+
+div#main section {
+  clear: both;
 }
 
 h3.constructor, h3.subsection-title {
@@ -658,8 +674,48 @@ h4.name a {
   color: #444;
 }
 
+h4.name span.type-signature a {
+  text-decoration: none;
+  color: #99d;
+}
 
+header.tutorial-header {
+  float: right;
+  clear: both;
+}
+header.tutorial-header ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+  margin-bottom: 30px;
+}
 
+section.tutorial article {
+  border-top: solid 1px #eee;
+  margin-left: -30px;
+  margin-right: -30px;
+  padding-left: 30px;
+  padding-right: 30px;
+  clear: both;
+}
+
+a {
+  color: #77d;
+}
+
+.methods-members ul {
+  margin:0;
+  padding:0;
+  list-style:none;
+  color: #ccc;
+}
+.methods-members li {
+  display:inline-block;
+}
+.methods-members li + li::before {
+    content: " | ";
+}
 
 
 /* BOOTSTRAP */

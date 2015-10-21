@@ -40,6 +40,7 @@
             <div class="lead"><?js= doc.classdesc ?></div>
         <?js } ?>
     <?js } else if (doc.kind === 'module' && doc.modules) { ?>
+      <h2>Module: <?js= doc.name ?></h2>
         <?js doc.modules.forEach(function(module) { ?>
             <?js if (module.classdesc) { ?>
                 <div class="lead"><?js= module.classdesc ?></div>
@@ -53,32 +54,39 @@
       ?>
       <div class="bs-callout bs-callout-default">
         <h5>Members</h5>
-
-        <dl class="dl-horizontal">
+        <br />
+        <dl class="dl-horizontal methods-members">
         <?js
       if (members.length > 0) {
-        ?><dt>Fields &amp; Properties</dt><dd><?js
+        ?><dt>Fields &amp; Properties</dt><dd><ul><?js
           members.forEach(function(m) {
             ?>
-            <a href="#<?js= m.name ?>"><?js= m.name ?></a> | 
+            <li><a href="#<?js= m.name ?>"><?js= m.name ?></a></li>
             <?js
           });
-        ?></dd><?js
+        ?></ul></dd><?js
       }
 
       if (methods.length > 0) {
-        ?><dt>Methods</dt><dd><?js
+        ?><dt>Methods</dt><dd><ul><?js
           methods.forEach(function(m) {
             ?>
-            <a href="#<?js= m.name ?>"><?js= m.name ?></a> |
+            <li><a href="#<?js= m.name ?>"><?js= m.name ?></a></li>
             <?js
           });
-        ?></dd><?js
+        ?></ul></dd><?js
       }
-      ?></div><?js
+      ?></dl></div><?js
     }
+
+    if (doc.rpc) { ?>
+      <div class="bs-callout bs-callout-rpc">
+        <h5>RPC: <?js= typeof doc.rpc === 'string' ? doc.rpc : doc.name ?></h5>
+        This class, or parts of this class are exposed via RPC
+      </div>
+    <?js }
+
     ?>
-    </dl>
 </header>
 
 <article>

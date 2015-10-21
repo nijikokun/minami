@@ -20,7 +20,7 @@ exports.defineTags = function(dictionary) {
     canHaveType: true
   });
   dictionary.defineTag('apiresponse', {
-    onTagged: handleBodyTag,
+    onTagged: handleResponseTag,
     canHaveType: true
   });
 };
@@ -44,5 +44,11 @@ function handleQueryParamTag(doclet, tag) {
 function handleBodyTag(doclet, tag) {
   if (!tag.value) return;
 
-  doclet.bodyParam = tag;
+  doclet.body = tag.value;
+}
+
+function handleResponseTag(doclet, tag) {
+  if (!tag.value) return;
+
+  doclet.response = tag.value;
 }

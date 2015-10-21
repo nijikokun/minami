@@ -291,33 +291,35 @@ function buildApiMemberNav(items, itemHeading, itemsSeen, linktoFn) {
   var nav = '';
 
   if (items.length) {
-      var itemsNav = '';
+    var routes = {};
+    items.forEach(function(item) {
+      var parts = item.route.split(' ');
+      var method = parts.length === 1 ? 'GET' : parts[0];
+      var route = parts.length === 1 ? parts[0] : parts[1];
+      if (!routes[route]) routes[route] = {};
+      routes[route][method] = item;
+    });
 
-      items.forEach(function(item) {
-          itemsNav += '<li>' + linktoFn(item.longname, item.route);
-          // if (methods.length) {
-          //     itemsNav += "<ul class='methods'>";
-          //
-          //     methods.forEach(function (method) {
-          //         var name = isRpc ?
-          //             (typeof method.rpc === 'string') ? method.rpc : method.name :
-          //             isApiRoute ?
-          //               method.route
-          //             method.name;
-          //         itemsNav += "<li data-type='method'>";
-          //         itemsNav += linkto(method.longname, name);
-          //         itemsNav += "</li>";
-          //     });
-          //
-          //     itemsNav += "</ul>";
-          // }
-          itemsNav += '</li>';
-          itemsSeen[item.longname] = true;
-      });
+    var itemsNav = '';
+    var routeArr = [];
 
-      if (itemsNav !== '') {
-          nav += '<h3>' + itemHeading + '</h3><ul>' + itemsNav + '</ul>';
+    for (var route in routes) { routeArr.push(route); }
+    routeArr.sort();
+    routeArr.forEach(function(route) {
+      itemsNav += '<li><a href="#">' + route + '</a>';
+      itemsNav += "<ul class='methods'>";
+      for (var method in routes[route]) {
+        itemsNav += "<li data-type='method'>";
+        itemsNav += linkto(routes[route][method].longname, method);
+        itemsNav += "</li>";
       }
+      itemsNav += "</ul>";
+      itemsNav += '</li>';
+    });
+
+    if (itemsNav !== '') {
+        nav += '<h3>' + itemHeading + '</h3><ul>' + itemsNav + '</ul>';
+    }
   }
 
   return nav;
