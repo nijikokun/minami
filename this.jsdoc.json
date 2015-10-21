@@ -1,0 +1,37 @@
+{
+  "configHelpUrl": "http://usejsdoc.org/about-configuring-jsdoc.html",
+  "script": "jsdoc --configure ./node_modules/loke-jsdoc-theme/default.jsdoc.json --verbose",
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
+  "source": {
+    "include": ["lib", "package.json", "README.md"],
+    "exclude": [],
+    "includePattern": ".js$",
+    "excludePattern": "(node_modules/|docs)"
+  },
+  "plugins": [
+    "./node_modules/jsdoc-babel",
+    "./node_modules/jsdoc/plugins/markdown",
+    "./plugins/async",
+    "./plugins/rpc",
+    "./plugins/api",
+    "./plugins/timeout"
+  ],
+  "markdown": {
+    "excludeTags": ["author"]
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": true
+  },
+  "opts": {
+    "destination": "./out/docs/",
+    "encoding": "utf8",
+    "private": false,
+    "recurse": true,
+    "template": "./",
+    "_tutorials": "./doc/tutorials"
+  }
+}
