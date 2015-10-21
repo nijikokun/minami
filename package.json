@@ -4,7 +4,8 @@
   "description": "Modified version of the minami JSDoc theme for LOKE apps",
   "main": "publish.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate-docs": "jsdoc --configure ./this.jsdoc.json --verbose"
   },
   "repository": {
     "type": "git",

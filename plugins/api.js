@@ -6,13 +6,22 @@ exports.defineTags = function(dictionary) {
     onTagged: handleRouteTag
   });
   dictionary.defineTag('apiparam', {
-    onTagged: handleRouteParamTag
+    onTagged: handleRouteParamTag,
+    canHaveType: true,
+    canHaveName: true
   });
   dictionary.defineTag('apiquery', {
-    onTagged: handleQueryParamTag
+    onTagged: handleQueryParamTag,
+    canHaveType: true,
+    canHaveName: true
   });
   dictionary.defineTag('apibody', {
-    onTagged: handleBodyTag
+    onTagged: handleBodyTag,
+    canHaveType: true
+  });
+  dictionary.defineTag('apiresponse', {
+    onTagged: handleBodyTag,
+    canHaveType: true
   });
 };
 
@@ -21,13 +30,19 @@ function handleRouteTag(doclet, tag) {
 }
 
 function handleRouteParamTag(doclet, tag) {
-  if (tag.value) doclet.routeParam = tag.value;
+  if (!tag.value) return;
+  doclet.routeParams = doclet.routeParams || [];
+  doclet.routeParams.push(tag);
 }
 
 function handleQueryParamTag(doclet, tag) {
-  if (tag.value) doclet.queryParam = tag.value;
+  if (!tag.value) return;
+  doclet.queryParams = doclet.queryParams || [];
+  doclet.queryParams.push(tag);
 }
 
 function handleBodyTag(doclet, tag) {
-  if (tag.value) doclet.bodyParam = tag.value;
+  if (!tag.value) return;
+
+  doclet.bodyParam = tag;
 }

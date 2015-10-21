@@ -2,21 +2,25 @@
 var exceptions = obj || {};
 var partial = this.partial.bind(this);
 ?>
-<dl class="error-list">
-
+<dl class="dl-horizontal">
 <?js
     exceptions.forEach(function(e) {
-        if (e && e.type && e.description) {
+        if (e) {
             ?>
             <dt>
+              <?js if (e.type) { ?>
                 <?js= partial('type.tmpl', e.type.names) ?>
+              <?js } else { ?>
+                Error
+              <?js }?>
             </dt>
             <dd>
+              <?js if (e.description) { ?>
                 <?js= e.description ?>
+              <?js } ?>
             </dd>
             <?js
         }
     });
 ?>
-
 </dl>

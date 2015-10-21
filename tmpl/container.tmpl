@@ -1,3 +1,4 @@
+<!--container.tmpl-->
 <?js
     var self = this;
     var isGlobalPage;
@@ -19,7 +20,14 @@
 
 <section>
 
-<header>
+<?js
+
+  var members = self.find({kind: 'member', memberof: isGlobalPage ? {isUndefined: true} : doc.longname});
+  var methods = self.find({kind: 'function', memberof: isGlobalPage ? {isUndefined: true} : doc.longname});
+
+?>
+
+<header data-tmpl="container.tmpl">
     <?js if (!doc.longname || doc.kind !== 'module') { ?>
         <h2><?js if (doc.ancestors && doc.ancestors.length) { ?>
             <span class="ancestors"><?js= doc.ancestors.join('') ?></span>
@@ -29,15 +37,48 @@
             <sup class="variation"><?js= doc.variation ?></sup>
         <?js } ?></h2>
         <?js if (doc.classdesc) { ?>
-            <div class="class-description"><?js= doc.classdesc ?></div>
+            <div class="lead"><?js= doc.classdesc ?></div>
         <?js } ?>
     <?js } else if (doc.kind === 'module' && doc.modules) { ?>
         <?js doc.modules.forEach(function(module) { ?>
             <?js if (module.classdesc) { ?>
-                <div class="class-description"><?js= module.classdesc ?></div>
+                <div class="lead"><?js= module.classdesc ?></div>
             <?js } ?>
         <?js }) ?>
     <?js } ?>
+
+    <?js
+    if (members.length + methods.length > 0) {
+
+      ?>
+      <div class="bs-callout bs-callout-default">
+        <h5>Members</h5>
+
+        <dl class="dl-horizontal">
+        <?js
+      if (members.length > 0) {
+        ?><dt>Fields &amp; Properties</dt><dd><?js
+          members.forEach(function(m) {
+            ?>
+            <a href="#<?js= m.name ?>"><?js= m.name ?></a> | 
+            <?js
+          });
+        ?></dd><?js
+      }
+
+      if (methods.length > 0) {
+        ?><dt>Methods</dt><dd><?js
+          methods.forEach(function(m) {
+            ?>
+            <a href="#<?js= m.name ?>"><?js= m.name ?></a> |
+            <?js
+          });
+        ?></dd><?js
+      }
+      ?></div><?js
+    }
+    ?>
+    </dl>
 </header>
 
 <article>
@@ -117,7 +158,6 @@
     <?js } ?>
 
     <?js
-        var members = self.find({kind: 'member', memberof: isGlobalPage ? {isUndefined: true} : doc.longname});
 
         // symbols that are assigned to module.exports are not globals, even though they're not a memberof anything
         if (isGlobalPage && members && members.length && members.forEach) {
@@ -135,7 +175,6 @@
     <?js } ?>
 
     <?js
-        var methods = self.find({kind: 'function', memberof: isGlobalPage ? {isUndefined: true} : doc.longname});
         if (methods && methods.length && methods.forEach) {
     ?>
         <h3 class="subsection-title">Methods</h3>

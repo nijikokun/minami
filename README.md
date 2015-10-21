@@ -4,10 +4,9 @@ Also see [the howto doc](howto-jsdoc.md)
 
 Based on Minami - A clean, responsive documentation template theme for JSDoc 3.
 
-*TODO: show LOKE theme... the following is the original Minami.*
+*TODO: show LOKE theme...*
 
-![Minami Screenshot](http://puu.sh/gOyNe/66c3adcb97.png)
-
+![Screenshot](screenshot.png)
 
 ## Install
 

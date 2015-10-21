@@ -1,8 +1,18 @@
+<!--members.tmpl-->
+<div class="member-details">
+
 <?js
 var data = obj;
 var self = this;
 ?>
-<h4 class="name" id="<?js= id ?>"><?js= data.attribs + name + (data.signature ? data.signature : '') ?></h4>
+
+<?js if (data.meta && self.outputSourceFiles) {?>
+  <?js= self.partial('source-link.tmpl', data) ?>
+<?js } ?>
+
+<h4 class="name" id="<?js= id ?>">
+  <?js= data.attribs + name + (data.signature ? data.signature : '') ?>
+</h4>
 
 <?js if (data.summary) { ?>
 <p class="summary"><?js= summary ?></p>
@@ -14,14 +24,7 @@ var self = this;
 </div>
 <?js } ?>
 
-<?js if (data.type && data.type.names) {?>
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            <?js= self.partial('type.tmpl', data.type.names) ?>
-        </li>
-    </ul>
-<?js } ?>
+<div>
 
 <?js= this.partial('details.tmpl', data) ?>
 
@@ -36,3 +39,7 @@ var self = this;
     <h5>Example<?js= examples.length > 1? 's':'' ?></h5>
     <?js= this.partial('examples.tmpl', examples) ?>
 <?js } ?>
+
+</div>
+
+</div>

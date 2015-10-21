@@ -287,6 +287,42 @@ function attachModuleSymbols(doclets, modules) {
     });
 }
 
+function buildApiMemberNav(items, itemHeading, itemsSeen, linktoFn) {
+  var nav = '';
+
+  if (items.length) {
+      var itemsNav = '';
+
+      items.forEach(function(item) {
+          itemsNav += '<li>' + linktoFn(item.longname, item.route);
+          // if (methods.length) {
+          //     itemsNav += "<ul class='methods'>";
+          //
+          //     methods.forEach(function (method) {
+          //         var name = isRpc ?
+          //             (typeof method.rpc === 'string') ? method.rpc : method.name :
+          //             isApiRoute ?
+          //               method.route
+          //             method.name;
+          //         itemsNav += "<li data-type='method'>";
+          //         itemsNav += linkto(method.longname, name);
+          //         itemsNav += "</li>";
+          //     });
+          //
+          //     itemsNav += "</ul>";
+          // }
+          itemsNav += '</li>';
+          itemsSeen[item.longname] = true;
+      });
+
+      if (itemsNav !== '') {
+          nav += '<h3>' + itemHeading + '</h3><ul>' + itemsNav + '</ul>';
+      }
+  }
+
+  return nav;
+}
+
 function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
     var nav = '';
 
@@ -295,7 +331,7 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
 
         items.forEach(function(item) {
             var isRpc = item.kind === 'rpc';
-            console.log('isRpc: ', isRpc);
+
             var longname = isRpc ? item.base : item.longname;
 
             var methodquery = {kind:'function', memberof: item.longname};
@@ -366,9 +402,20 @@ function linktoExternal(longName, name) {
 function buildNav(members) {
     var nav = '<h2><a href="index.html">Home</a></h2>';
     var seen = {};
+
+    // we create different hashmaps for these as duplicates are allowed across them
     var seenTutorials = {};
     var seenRpc = {};
+    var seenApi = {};
 
+    // get all functions with a route defined
+    members.api = find({kind:'function'})
+    .filter(function(fnDoclet) {
+      console.log(fnDoclet.route);
+      return fnDoclet.route;
+    });
+
+    // get all classes that are RPC services
     members.rpc = members.classes
     .filter(function(doclet) { return doclet.rpc; })
     .map(function(doclet) {
@@ -386,6 +433,7 @@ function buildNav(members) {
 
 
     nav += buildMemberNav(members.tutorials, 'Tutorials', seenTutorials, linktoTutorial);
+    nav += buildApiMemberNav(members.api, 'API', seenApi, linkto);
     nav += buildMemberNav(members.rpc, 'RPC', seenRpc, linkto);
     nav += buildMemberNav(members.namespaces, 'Namespaces', seen, linkto);
     nav += buildMemberNav(members.interfaces, 'Interfaces', seen, linkto);
