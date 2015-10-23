@@ -590,6 +590,7 @@ section article hr {
 }
 
 h1.page-title {
+  font-size: 3em;
   float: right;
   text-align: right;
   color: #f5f5f5;
@@ -614,6 +615,9 @@ h2 span.ancestors a {
   color: #ccc !important;
 }
 
+div#main {
+  font-size: 0.8em;
+}
 
 div#main section {
   clear: both;
