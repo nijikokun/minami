@@ -588,3 +588,14 @@ dl.param-type {
     margin-left: 0;
   }
 }
+
+@media only print {
+  nav {
+    display: none;
+  }
+
+  #main {
+    float: none;
+    width: 100%;
+  }
+}
