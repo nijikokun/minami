@@ -60,7 +60,8 @@ In your `.jsdoc.json` file, add a template option.
     ],
     "templates": {
         "cleverLinks": false,
-        "monospaceLinks": true
+        "monospaceLinks": true,
+        "useLongnameInNav": false
     },
     "opts": {
         "destination": "./docs/",
@@ -71,6 +72,8 @@ In your `.jsdoc.json` file, add a template option.
     }
 }
 ```
+
+Specifying a number for useLongnameInNav it will be the max number of path elements to show in nav (starting from Class).
 
 ## License
 
