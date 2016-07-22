@@ -289,6 +289,8 @@ function attachModuleSymbols(doclets, modules) {
 
 function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
     var nav = '';
+    var conf = env.conf.templates || {};
+    conf.default = conf.default || {};
 
     if (items && items.length) {
         var itemsNav = '';
@@ -301,7 +303,21 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
                 itemsNav += '<li>' + linktoFn('', item.name);
                 itemsNav += '</li>';
             } else if ( !hasOwnProp.call(itemsSeen, item.longname) ) {
-                itemsNav += '<li>' + linktoFn(item.longname, item.name.replace(/^module:/, ''));
+                var displayName;
+                if (!!conf.default.useLongnameInNav) {
+                    displayName = item.longname;
+                    if(conf.default.useLongnameInNav > 0 && conf.default.useLongnameInNav !== true){
+                        var num = conf.default.useLongnameInNav;
+                        var cropped = item.longname.split(".").slice(-num).join(".");
+                        if(cropped !== displayName){
+                            displayName = "..." + cropped;
+                        }
+                    }
+                } else {
+                    displayName = item.name;
+                }
+
+                itemsNav += '<li>' + linktoFn(item.longname, displayName.replace(/^module:/g, ''));
                 if (methods.length) {
                     itemsNav += "<ul class='methods'>";
 
@@ -556,8 +572,8 @@ exports.publish = function(taffyData, opts, tutorials) {
     members.tutorials = tutorials.children;
 
     // output pretty-printed source files by default
-    var outputSourceFiles = conf.default && conf.default.outputSourceFiles !== false 
-        ? true 
+    var outputSourceFiles = conf.default && conf.default.outputSourceFiles !== false
+        ? true
         : false;
 
     // add template helpers
@@ -577,8 +593,8 @@ exports.publish = function(taffyData, opts, tutorials) {
         generateSourceFiles(sourceFiles, opts.encoding);
     }
 
-    if (members.globals.length) { 
-        generate('', 'Global', [{kind: 'globalobj'}], globalUrl); 
+    if (members.globals.length) {
+        generate('', 'Global', [{kind: 'globalobj'}], globalUrl);
     }
 
     // index page displays information from package.json and lists files
@@ -655,6 +671,6 @@ exports.publish = function(taffyData, opts, tutorials) {
             saveChildren(child);
         });
     }
-    
+
     saveChildren(tutorials);
 };
