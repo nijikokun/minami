@@ -316,6 +316,10 @@ footer {
   color: #4D4E53;
 }
 
+.prettyprint code:empty:before {
+  content: '';
+}
+
 .prettyprint > code {
   padding: 15px
 }
