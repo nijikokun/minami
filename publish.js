@@ -322,6 +322,10 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
                     itemsNav += "<ul class='methods'>";
 
                     methods.forEach(function (method) {
+                        if (method.inherited && conf.showInheritedInNav === false) {
+                            return
+                        }
+
                         itemsNav += "<li data-type='method'>";
                         itemsNav += linkto(method.longname, method.name);
                         itemsNav += "</li>";
