@@ -2,6 +2,7 @@
 var data = obj;
 var self = this;
 ?>
+<div class="section-members">
 <h4 class="name" id="<?js= id ?>"><?js= data.attribs + name + (data.signature ? data.signature : '') ?></h4>
 
 <?js if (data.summary) { ?>
@@ -14,6 +15,8 @@ var self = this;
 </div>
 <?js } ?>
 
+<?js= this.partial('details.tmpl', data) ?>
+
 <?js if (data.type && data.type.names) {?>
     <h5>Type:</h5>
     <ul>
@@ -22,8 +25,6 @@ var self = this;
         </li>
     </ul>
 <?js } ?>
-
-<?js= this.partial('details.tmpl', data) ?>
 
 <?js if (data.fires && fires.length) { ?>
     <h5>Fires:</h5>
@@ -36,3 +37,4 @@ var self = this;
     <h5>Example<?js= examples.length > 1? 's':'' ?></h5>
     <?js= this.partial('examples.tmpl', examples) ?>
 <?js } ?>
+</div>

@@ -2,7 +2,7 @@
 
 A clean, responsive documentation template theme for JSDoc 3.
 
-![Minami Screenshot](http://puu.sh/gOyNe/66c3adcb97.png)
+![Minami Screenshot](http://i.imgur.com/rPCIFqT.png)
 
 
 ## Uses

@@ -2,6 +2,7 @@
 var data = obj;
 var self = this;
 ?>
+<div class="section-method">
 <?js if (data.kind !== 'module') { ?>
     <?js if (data.kind === 'class' && data.classdesc) { ?>
     <h2>Constructor</h2>
@@ -21,18 +22,22 @@ var self = this;
 </div>
 <?js } ?>
 
+<?js= this.partial('details.tmpl', data) ?>
+
 <?js if (data.augments && data.alias && data.alias.indexOf('module:') === 0) { ?>
     <h5>Extends:</h5>
     <?js= self.partial('augments.tmpl', data) ?>
 <?js } ?>
 
 <?js if (kind === 'event' && data.type && data.type.names) {?>
+<div class="section-type">
     <h5>Type:</h5>
     <ul>
         <li>
             <?js= self.partial('type.tmpl', data.type.names) ?>
         </li>
     </ul>
+</div>
 <?js } ?>
 
 <?js if (data['this']) { ?>
@@ -44,8 +49,6 @@ var self = this;
     <h5>Parameters:</h5>
     <?js= this.partial('params.tmpl', params) ?>
 <?js } ?>
-
-<?js= this.partial('details.tmpl', data) ?>
 
 <?js if (data.kind !== 'module' && data.requires && data.requires.length) { ?>
 <h5>Requires:</h5>
@@ -69,13 +72,16 @@ var self = this;
 <?js } ?>
 
 <?js if (data.listeners && listeners.length) { ?>
+<div class="section-event-listeners">
 <h5>Listeners of This Event:</h5>
 <ul><?js listeners.forEach(function(f) { ?>
     <li><?js= self.linkto(f) ?></li>
 <?js }); ?></ul>
+</div>
 <?js } ?>
 
 <?js if (data.exceptions && exceptions.length) { ?>
+<div class="section-throws">
 <h5>Throws:</h5>
 <?js if (exceptions.length > 1) { ?><ul><?js
     exceptions.forEach(function(r) { ?>
@@ -84,10 +90,12 @@ var self = this;
 ?></ul><?js } else {
     exceptions.forEach(function(r) { ?>
         <?js= self.partial('exceptions.tmpl', r) ?>
-    <?js });
-} } ?>
+    <?js }); } ?>
+</div>
+<?js } ?>
 
 <?js if (data.returns && returns.length) { ?>
+<div class="section-returns">
 <h5>Returns:</h5>
 <?js if (returns.length > 1) { ?><ul><?js
     returns.forEach(function(r) { ?>
@@ -96,10 +104,14 @@ var self = this;
 ?></ul><?js } else {
     returns.forEach(function(r) { ?>
         <?js= self.partial('returns.tmpl', r) ?>
-    <?js });
-} } ?>
+    <?js }); } ?>
+</div>
+<?js } ?>
 
 <?js if (data.examples && examples.length) { ?>
-    <h5>Example<?js= examples.length > 1? 's':'' ?></h5>
-    <?js= this.partial('examples.tmpl', examples) ?>
+<div class="section-examples">
+<h5>Example<?js= examples.length > 1? 's':'' ?></h5>
+<?js= this.partial('examples.tmpl', examples) ?>
+</div>
 <?js } ?>
+</div>
