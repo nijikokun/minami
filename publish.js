@@ -408,6 +408,8 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
 
         if (item.kind === 'module') {
           nav.push(buildNavHeading(linktoFn(item.longname, displayName)))
+        } else if (itemHeading === 'Tutorials') {
+          nav.push(buildNavItem(linktoFn(item.longname, displayName)))
         } else {
           nav.push(buildNavHeading(buildNavType(item.kind, linktoFn(item.longname, displayName))))
         }
