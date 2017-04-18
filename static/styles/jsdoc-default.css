@@ -94,6 +94,15 @@ tt, code, kbd, samp {
   background: #f4f4f4;
   padding: 1px 5px;
   border-radius: 5px;
+  font-size: 14px;
+}
+
+blockquote {
+  display: block;
+  border-left: 4px solid #eee;
+  margin: 0;
+  padding-left: 1em;
+  color: #888;
 }
 
 .class-description {
@@ -136,8 +145,77 @@ section {
   font-weight: lighter;
 }
 
+/** Readme  **/
+
+.readme {
+  font-size: 16px;
+}
+
+.readme h1,
+.readme h2,
+.readme h3,
+.readme h4,
+.readme h5 {
+  margin-top: 1em;
+  margin-bottom: 16px;
+  font-weight: bold;
+  padding: 0;
+}
+
+.readme h1 {
+  font-size: 2em;
+  padding-bottom: 0.3em;
+}
+
+.readme h2 {
+  font-size: 1.75em;
+  padding-bottom: 0.3em;
+}
+
+.readme h3 {
+  font-size: 1.5em;
+  background-color: transparent;
+}
+
+.readme h4 {
+  font-size: 1.25em;
+}
+
+.readme h5 {
+  font-size: 1em;
+}
+
 .readme img {
   max-width: 100%;
+}
+
+.readme ul, .readme ol {
+  padding-left: 2em;
+}
+
+.readme pre > code {
+  font-size: 0.85em;
+}
+
+.readme table {
+  margin-bottom: 1em;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.readme table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.readme table th,
+.readme table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+.readme table tr:nth-child(2n) {
+  background-color: #f8f8f8;
 }
 
 /** Nav **/
@@ -198,6 +276,12 @@ nav li {
   background: #C8E6C9;
   color: #388E3C;
 }
+
+.type-module {
+  background: #E1BEE7;
+  color: #7B1FA2;
+}
+
 
 /** Footer **/
 footer {
@@ -300,10 +384,9 @@ footer {
 }
 
 .prettyprint code {
-  font-size: 100%;
+  font-size: 12px;
   line-height: 18px;
   display: block;
-  margin: 0 30px;
   background-color: #fff;
   color: #4D4E53;
 }

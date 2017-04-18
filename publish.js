@@ -344,17 +344,17 @@ function buildNav(members) {
 
   nav.push(buildNavLink('home', '<a href="index.html">Home</a>'))
 
+  nav = nav.concat(buildMemberNav(members.tutorials, "Tutorials", seenTutorials, linktoTutorial))
   nav = nav.concat(buildMemberNav(members.classes, "Classes", seen, linkto))
   nav = nav.concat(buildMemberNav(members.modules, "Modules", {}, linkto))
   nav = nav.concat(buildMemberNav(members.externals, "Externals", seen, linktoExternal))
   nav = nav.concat(buildMemberNav(members.events, "Events", seen, linkto))
   nav = nav.concat(buildMemberNav(members.namespaces, "Namespaces", seen, linkto))
   nav = nav.concat(buildMemberNav(members.mixins, "Mixins", seen, linkto))
-  nav = nav.concat(buildMemberNav(members.tutorials, "Tutorials", seenTutorials, linktoTutorial))
   nav = nav.concat(buildMemberNav(members.interfaces, "Interfaces", seen, linkto))
 
   if (members.globals.length) {
-    nav.push(buildNavHeading(linkto('global', 'Global')))
+    nav.push(buildNavHeading(linkto('global', 'Globals')))
 
     members.globals.forEach(function (item) {
       if (item.kind !== "typedef" && !hasOwnProp.call(seen, item.longname)) {
@@ -406,9 +406,7 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
 
         displayName = displayName.replace(/^module:/g, "")
 
-        if (item.kind === 'module') {
-          nav.push(buildNavHeading(linktoFn(item.longname, displayName)))
-        } else if (itemHeading === 'Tutorials') {
+        if (itemHeading === 'Tutorials') {
           nav.push(buildNavItem(linktoFn(item.longname, displayName)))
         } else {
           nav.push(buildNavHeading(buildNavType(item.kind, linktoFn(item.longname, displayName))))
@@ -820,7 +818,7 @@ exports.publish = function(taffyData, opts, tutorials) {
   function saveChildren(node) {
     node.children.forEach(function(child) {
       generateTutorial(
-        "Tutorial: " + child.title,
+        child.title,
         child,
         helper.tutorialToUrl(child.name)
       )
