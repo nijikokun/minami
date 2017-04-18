@@ -72,7 +72,7 @@
         <?js= self.partial('augments.tmpl', doc) ?>
     <?js } ?>
 
-    <?js if (doc.requires && doc.requires.length) { ?>
+    <?js if (doc.kind === 'module' && doc.requires && doc.requires.length) { ?>
         <h3 class="subsection-title">Requires</h3>
 
         <ul><?js doc.requires.forEach(function(r) { ?>
