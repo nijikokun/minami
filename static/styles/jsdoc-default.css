@@ -262,6 +262,11 @@ nav li {
   font-size: 13px;
 }
 
+.nav-tut-list {
+  margin: 0 0.5em;
+  padding: 0;
+}
+
 .type-function {
   background: #B3E5FC;
   color: #0288D1;

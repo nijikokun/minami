@@ -370,62 +370,77 @@ function buildNav(members) {
 
 function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
   var nav = []
-  var conf = env.conf.templates || {}
-
-  conf.default = conf.default || {}
-
   if (items && items.length) {
     var itemsNav = ""
 
     nav.push(buildNavHeading(itemHeading))
-
-    items.forEach(function(item) {
-      var methods = find({ kind: "function", memberof: item.longname })
-      var members = find({ kind: "member", memberof: item.longname })
-      var displayName
-
-      if (!hasOwnProp.call(item, "longname")) {
-        nav.push(buildNavItem(linkfoFn('', item.name)))
-        return
-      }
-      
-      if (!hasOwnProp.call(itemsSeen, item.longname)) {
-        if (!!conf.default.useLongnameInNav) {
-          displayName = item.longname
-
-          if (conf.default.useLongnameInNav > 0 && conf.default.useLongnameInNav !== true) {
-            var num = conf.default.useLongnameInNav
-            var cropped = item.longname.split(".").slice(-num).join(".")
-            if (cropped !== displayName) {
-              displayName = "..." + cropped
-            }
-          }
-        } else {
-          displayName = item.name
-        }
-
-        displayName = displayName.replace(/^module:/g, "")
-
-        if (itemHeading === 'Tutorials') {
-          nav.push(buildNavItem(linktoFn(item.longname, displayName)))
-        } else {
-          nav.push(buildNavHeading(buildNavType(item.kind, linktoFn(item.longname, displayName))))
-        }
-
-        if (methods.length) {
-          methods.forEach(function(method) {
-            if (method.inherited && conf.showInheritedInNav === false) {
-              return
-            }
-
-            nav.push(buildNavItem(buildNavType(method.kind, linkto(method.longname, method.name))))
-          })
-        }
-
-        itemsSeen[item.longname] = true
-      }
-    })
+    nav.push(buildMemberNavList(items, itemsSeen, linktoFn, itemHeading === 'Tutorials').join(''))
   }
+
+  return nav
+}
+
+function buildMemberNavList(items, itemsSeen, linktoFn, areTutorialLinks) {
+  var nav = []
+  var conf = env.conf.templates || {}
+
+  conf.default = conf.default || {}
+
+
+  items.forEach(function(item) {
+    var methods = find({ kind: "function", memberof: item.longname })
+    var members = find({ kind: "member", memberof: item.longname })
+    var displayName
+
+    if (!hasOwnProp.call(item, "longname")) {
+      nav.push(buildNavItem(linkfoFn('', item.name)))
+      return
+    }
+
+    if (!hasOwnProp.call(itemsSeen, item.longname)) {
+      if (!!conf.default.useLongnameInNav) {
+        displayName = item.longname
+
+        if (conf.default.useLongnameInNav > 0 && conf.default.useLongnameInNav !== true) {
+          var num = conf.default.useLongnameInNav
+          var cropped = item.longname.split(".").slice(-num).join(".")
+          if (cropped !== displayName) {
+            displayName = "..." + cropped
+          }
+        }
+      } else {
+        displayName = item.name
+      }
+
+      displayName = displayName.replace(/^module:/g, "")
+
+      if (areTutorialLinks) {
+        nav.push(buildNavItem(linktoFn(item.longname, displayName)))
+
+        if(conf.showTutorialChildren !== false && item.children && item.children.length) {
+          nav.push(
+            '<ol class="nav-tut-list">' +
+            buildMemberNavList(item.children, itemsSeen, linktoFn, areTutorialLinks).join('') +
+            '</ol>'
+          )
+        }
+      } else {
+        nav.push(buildNavHeading(buildNavType(item.kind, linktoFn(item.longname, displayName))))
+      }
+
+      if (methods.length) {
+        methods.forEach(function(method) {
+          if (method.inherited && conf.showInheritedInNav === false) {
+            return
+          }
+
+          nav.push(buildNavItem(buildNavType(method.kind, linkto(method.longname, method.name))))
+        })
+      }
+
+      itemsSeen[item.longname] = true
+    }
+  })
 
   return nav
 }
