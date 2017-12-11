@@ -385,7 +385,7 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
       var displayName
 
       if (!hasOwnProp.call(item, "longname")) {
-        nav.push(buildNavItem(linkfoFn('', item.name)))
+        nav.push(buildNavItem(linktoFn('', item.name)))
         return
       }
       
