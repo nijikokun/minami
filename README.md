@@ -67,7 +67,8 @@ In your `.jsdoc.json` file, add a template option.
         "cleverLinks": false,
         "monospaceLinks": true,
         "useLongnameInNav": false,
-        "showInheritedInNav": true
+        "showInheritedInNav": true,
+        "sort": true,
     },
     "opts": {
         "destination": "./docs/",
