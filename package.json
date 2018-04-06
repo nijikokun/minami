@@ -1,6 +1,6 @@
 {
-  "name": "minami",
-  "version": "1.2.3",
+  "name": "minami-compat",
+  "version": "1.2.4",
   "description": "Clean and minimal JSDoc 3 Template / Theme",
   "main": "publish.js",
   "scripts": {
