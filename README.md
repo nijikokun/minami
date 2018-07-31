@@ -1,5 +1,7 @@
 # Minami
 
+# DEPRECATED! MODIFICATIONS ARE NOT SUPPORTED IN NODE 10, USE ORIGINAL MINAMI THEME.
+
 A clean, responsive documentation template theme for JSDoc 3.
 
 ![Minami Screenshot](http://i.imgur.com/rPCIFqT.png)
