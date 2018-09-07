@@ -33,7 +33,7 @@ $ jsdoc entry-file.js -t path/to/minami
 In your projects `package.json` file add a generate script:
 
 ```json
-"script": {
+"scripts": {
   "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
 }
 ```
