@@ -1,7 +1,7 @@
 {
-  "name": "minami",
-  "version": "1.2.3",
-  "description": "Clean and minimal JSDoc 3 Template / Theme",
+  "name": "angular-minami",
+  "version": "1.0.0",
+  "description": "Clean and minimal JSDoc 3 Template / Theme supporting Angular JS 1.x",
   "main": "publish.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
