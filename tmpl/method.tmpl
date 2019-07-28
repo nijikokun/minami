@@ -3,20 +3,22 @@ var data = obj;
 var self = this;
 ?>
 <div class="section-method">
-<?js if (data.kind !== 'module') { ?>
+<?js if (data.kind !== 'module' && !data.hideconstructor) { ?>
     <?js if (data.kind === 'class' && data.classdesc) { ?>
     <h2>Constructor</h2>
     <?js } ?>
 
+    <?js if (data.kind !== 'namespace') { ?>
     <h4 class="name" id="<?js= id ?>"><?js= data.attribs + (kind === 'class' ? 'new ' : '') +
     name + (data.signature || '') ?></h4>
+    <?js } ?>
 
     <?js if (data.summary) { ?>
     <p class="summary"><?js= summary ?></p>
     <?js } ?>
 <?js } ?>
 
-<?js if (data.kind !== 'module' && data.description) { ?>
+<?js if (data.kind !== 'module' && data.description && !data.hideconstructor) { ?>
 <div class="description">
     <?js= data.description ?>
 </div>
@@ -45,7 +47,7 @@ var self = this;
     <ul><li><?js= this.linkto(data['this'], data['this']) ?></li></ul>
 <?js } ?>
 
-<?js if (data.params && params.length) { ?>
+<?js if (data.params && params.length && !data.hideconstructor) { ?>
     <h5>Parameters:</h5>
     <?js= this.partial('params.tmpl', params) ?>
 <?js } ?>
@@ -80,6 +82,20 @@ var self = this;
 </div>
 <?js } ?>
 
+<?js if (data.modifies && modifies.length) { ?>
+<div class="section-modifies">
+<h5>Modifies:</h5>
+<?js if (modifies.length > 1) { ?><ul><?js
+    modifies.forEach(function(r) { ?>
+        <li><?js= self.partial('modifies.tmpl', r) ?></li>
+    <?js });
+?></ul><?js } else {
+    modifies.forEach(function(r) { ?>
+        <?js= self.partial('modifies.tmpl', r) ?>
+    <?js }); } ?>
+</div>
+<?js } ?>
+
 <?js if (data.exceptions && exceptions.length) { ?>
 <div class="section-throws">
 <h5>Throws:</h5>
@@ -104,6 +120,20 @@ var self = this;
 ?></ul><?js } else {
     returns.forEach(function(r) { ?>
         <?js= self.partial('returns.tmpl', r) ?>
+    <?js }); } ?>
+</div>
+<?js } ?>
+
+<?js if (data.yields && yields.length) { ?>
+<div class="section-yields">
+<h5>Yields:</h5>
+<?js if (yields.length > 1) { ?><ul><?js
+    yields.forEach(function(r) { ?>
+        <li><?js= self.partial('yields.tmpl', r) ?></li>
+    <?js });
+?></ul><?js } else {
+    yields.forEach(function(r) { ?>
+        <?js= self.partial('yields.tmpl', r) ?>
     <?js }); } ?>
 </div>
 <?js } ?>
