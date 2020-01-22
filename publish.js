@@ -67,6 +67,16 @@ function needsSignature(doclet) {
         break
       }
     }
+  } else if (
+    doclet.kind === 'namespace' &&
+    doclet.meta &&
+    doclet.meta.code &&
+    doclet.meta.code.type &&
+    doclet.meta.code.type.match(/[Ff]unction/)
+  ) {
+    // and namespaces that are functions get a signature (but finding them is a
+    // bit messy)
+    needsSig = true
   }
 
   return needsSig
@@ -157,12 +167,13 @@ function addSignatureReturns(f) {
   var attribsString = ""
   var returnTypes = []
   var returnTypesString = ""
+  var source = f.yields || f.returns
 
   // jam all the return-type attributes into an array. this could create odd results (for example,
   // if there are both nullable and non-nullable return types), but let's assume that most people
   // who use multiple @return tags aren't using Closure Compiler type annotations, and vice-versa.
-  if (f.returns) {
-    f.returns.forEach(function(item) {
+  if (source) {
+    source.forEach(function(item) {
       helper.getAttribs(item).forEach(function(attrib) {
         if (attribs.indexOf(attrib) === -1) {
           attribs.push(attrib)
@@ -173,8 +184,8 @@ function addSignatureReturns(f) {
     attribsString = buildAttribsString(attribs)
   }
 
-  if (f.returns) {
-    returnTypes = addNonParamAttributes(f.returns)
+  if (source) {
+    returnTypes = addNonParamAttributes(source)
   }
   if (returnTypes.length) {
     returnTypesString = util.format(
