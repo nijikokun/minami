@@ -355,6 +355,12 @@ function buildNav(members) {
 
   nav.push(buildNavLink('home', '<a href="index.html">Home</a>'))
 
+  // angular
+  nav = nav.concat(buildMemberNav(members.services, "Services", seen, linkto))
+  nav = nav.concat(buildMemberNav(members.controllers, "Controllers", seen, linkto))
+  nav = nav.concat(buildMemberNav(members.directives, "Directives", seen, linkto))
+  nav = nav.concat(buildMemberNav(members.filters, "Filters", seen, linkto))
+  
   nav = nav.concat(buildMemberNav(members.tutorials, "Tutorials", seenTutorials, linktoTutorial))
   nav = nav.concat(buildMemberNav(members.classes, "Classes", seen, linkto))
   nav = nav.concat(buildMemberNav(members.modules, "Modules", {}, linkto))
@@ -363,6 +369,8 @@ function buildNav(members) {
   nav = nav.concat(buildMemberNav(members.namespaces, "Namespaces", seen, linkto))
   nav = nav.concat(buildMemberNav(members.mixins, "Mixins", seen, linkto))
   nav = nav.concat(buildMemberNav(members.interfaces, "Interfaces", seen, linkto))
+
+
 
   if (members.globals.length) {
     nav.push(buildNavHeading(linkto('global', 'Globals')))
@@ -391,6 +399,7 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
     nav.push(buildNavHeading(itemHeading))
 
     items.forEach(function(item) {
+
       var methods = find({ kind: "function", memberof: item.longname })
       var members = find({ kind: "member", memberof: item.longname })
       var displayName
@@ -692,6 +701,12 @@ exports.publish = function(taffyData, opts, tutorials) {
   var members = helper.getMembers(data)
   members.tutorials = tutorials.children
 
+  // angular
+  members.services = find({ngdoc: 'service'})
+  members.directives = find({ngdoc: 'directive'})
+  members.controllers = find({ngdoc: 'controller'})
+  members.filters = find({ngdoc: 'filter'})
+
   // output pretty-printed source files by default
   var outputSourceFiles = conf.default &&
     conf.default.outputSourceFiles !== false
@@ -745,6 +760,10 @@ exports.publish = function(taffyData, opts, tutorials) {
   var mixins = taffy(members.mixins)
   var externals = taffy(members.externals)
   var interfaces = taffy(members.interfaces)
+  var services = taffy(members.services)
+  var controllers = taffy(members.controllers)
+  var directives = taffy(members.directives)
+  var filters = taffy(members.filters)
 
   Object.keys(helper.longnameToUrl).forEach(function(longname) {
     var myModules = helper.find(modules, { longname: longname })
@@ -803,6 +822,46 @@ exports.publish = function(taffyData, opts, tutorials) {
         "Interface",
         myInterfaces[0].name,
         myInterfaces,
+        helper.longnameToUrl[longname]
+      )
+    }
+
+    var myFilters = helper.find(filters, { longname: longname })
+    if (myFilters.length) {
+      generate(
+        "Filter",
+        myFilters[0].name,
+        myFilters,
+        helper.longnameToUrl[longname]
+      )
+    }
+
+    var myServices = helper.find(services, { longname: longname })
+    if (myServices.length) {
+      generate(
+        "Service",
+        myServices[0].name,
+        myServices,
+        helper.longnameToUrl[longname]
+      )
+    }
+
+    var myContollers = helper.find(controllers, { longname: longname })
+    if (myContollers.length) {
+      generate(
+        "Controller",
+        myContollers[0].name,
+        myContollers,
+        helper.longnameToUrl[longname]
+      )
+    }
+
+    var myDirectives = helper.find(directives, { longname: longname })
+    if (myDirectives.length) {
+      generate(
+        "Directive",
+        myDirectives[0].name,
+        myDirectives,
         helper.longnameToUrl[longname]
       )
     }
