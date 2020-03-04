@@ -540,7 +540,15 @@ exports.publish = function(taffyData, opts, tutorials) {
   // set up tutorials for helper
   helper.setTutorials(tutorials)
   data = helper.prune(data)
-  data.sort("longname, version, since")
+
+  if(opts.sort && (typeof opts.sort == 'string' || typeof opts.sort == 'boolean')){
+    var sortOrder = "longname, version, since"
+    if(typeof opts.sort == 'string'){
+      sortOrder = opts.sort
+    }
+    data.sort(sortOrder)
+  }
+  
   helper.addEventListeners(data)
 
   var sourceFiles = {}
