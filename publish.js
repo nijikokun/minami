@@ -399,7 +399,7 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
         nav.push(buildNavItem(linkfoFn('', item.name)))
         return
       }
-      
+
       if (!hasOwnProp.call(itemsSeen, item.longname)) {
         if (!!conf.default.useLongnameInNav) {
           displayName = item.longname
@@ -433,6 +433,12 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
           })
         }
 
+        if (members.length) {
+          members.forEach(function(member) {
+            nav.push(buildNavItem(buildNavType(member.kind, linkto(member.longname, member.name))))
+          })
+        }
+
         itemsSeen[item.longname] = true
       }
     })
@@ -450,9 +456,9 @@ function linktoExternal(longName, name) {
 }
 
 /**
- * Helper to generate navigation list link wrapper around navigation links for 
+ * Helper to generate navigation list link wrapper around navigation links for
  * locations.
- * 
+ *
  * @param {String} linkClass navigation link classname
  * @param {String} linkContent navigation link HTML content
  * @return {String}
@@ -468,7 +474,7 @@ function buildNavLink (linkClass, linkContent) {
 /**
  * Helper to generate navigation list header wrapper around navigation header content
  * for headings and filenames.
- * 
+ *
  * @param {String} content navigation header content
  * @return {String}
  */
@@ -481,9 +487,9 @@ function buildNavHeading (content) {
 }
 
 /**
- * Helper for generating generic navigation wrapper around content passed for 
+ * Helper for generating generic navigation wrapper around content passed for
  * methods, and types.
- * 
+ *
  * @param {String} itemContent navigation item content
  * @return {String}
  */
