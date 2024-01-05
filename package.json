@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/Nijikokun/minami/issues"
   },
-  "homepage": "https://github.com/Nijikokun/minami"
+  "homepage": "https://github.com/Nijikokun/minami",
+  "dependencies": {
+    "@jsdoc/salty": "^0.2.7",
+    "jsdoc": "^4.0.2"
+  }
 }
