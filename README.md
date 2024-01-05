@@ -7,7 +7,7 @@ A clean, responsive documentation template theme for JSDoc 3.
 
 ## Uses
 
-- [the Taffy Database library](http://taffydb.com/)
+- [the Salty (Taffy Database replacement) library](https://www.npmjs.com/package/@jsdoc/salty)
 - [Underscore Template library](http://underscorejs.org/#template)
 - [Montserrat](https://fonts.google.com/specimen/Montserrat) & Helvetica Neue
 
